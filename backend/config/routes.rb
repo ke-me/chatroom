@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   get '/api/test', to: 'application#test'
 
   # resourcesでRESTfulなルート定義を自動生成。indexアクションとcreateアクションのみ。
-  resources :rooms, only: [:index, :create]
+  # 2つのリソースは関連性を持っており、その関連性を表現するために「ネスト（入れ子）」という形式が用いられている。
+  resources :rooms, only: [:index, :create] do
+    resources :messages, only: [:index, :create]
+  end
 
   # Defines the root path route ("/")
   # root "posts#index"
